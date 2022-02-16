@@ -10,9 +10,18 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Framework css
 ```
-npm run build
+npm add spectre.css
+```
+```
+import 'spectre.css/dist/spectre.min.css'
+import 'spectre.css/dist/spectre-icons.min.css'
+```
+
+### Axios
+```
+npm add axios
 ```
 
 ### Customize configuration

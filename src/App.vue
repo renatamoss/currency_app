@@ -1,30 +1,52 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="container grid-lg my-2 py-2">
+    
+    <!--Acompanhando-->
+    <div class="card mb-2">
+      <div class="card-header">
+        <div class="h4">Acompanhando</div>
+      </div>
+      <div class="card-body">
+
+        
+        <watch-list-quotes />
+      </div>
+    </div>
+
+    <!--Todas as moedas -->
+    <div class="card">
+      <div class="card-header">
+        <div class="h4">Todas as moedas</div>
+      </div>
+      <div class="card-body">
+        <list-quotes :quotes="quotes" />
+      </div>
+    </div>
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { onMounted, reactive, toRefs } from "vue";
+import api from "@/services/api";
+import ListQuotes from './components/ListQuotes';
+import WatchListQuotes from './components/WatchListQuotes';
 
-#nav {
-  padding: 30px;
+export default {
+  components: { ListQuotes, WatchListQuotes },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  setup() {
+    const data = reactive({
+      quotes: {},
+    });
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+    onMounted(async () => {
+      const response = await api.last();
+      data.quotes = response.data;
+    });
+
+    return { ...toRefs(data) };
+  },
+};
+</script>
+
+
