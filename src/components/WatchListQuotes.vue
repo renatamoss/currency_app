@@ -1,14 +1,13 @@
 <template>
+  <cite class="text-small">
+    Atualizará novamente em <b> {{ nextUpDateTime }} Segundos </b>
+  </cite>
   <list-quotes
     :quotes="quotes"
     :listen-quotes="listenQuotes"
-    @unListen="onUnListen"
+    @remove-quote="removeQuote"
   />
-  <div class="mt-2 text-right">
-    <cite class="text-small">
-      Atualizará novamente em <b> {{ nextUpDateTime }} Segundos </b>
-    </cite>
-  </div>
+  <div class="mt-2 text-right"></div>
 </template>
 
 <script>
@@ -26,7 +25,7 @@ export default {
       required: true,
     },
   },
-  emits: ['unListen'],
+  emits: ["removeQuote"],
 
   setup(props, { emit }) {
     const interval = ref(null);
@@ -34,8 +33,8 @@ export default {
     const nextUpDateTime = ref(CURRENT_UPDATE_TIME);
 
     const methods = reactive({
-      onUnListen(code) {
-        emit("unListen", code);
+      removeQuote(code) {
+        emit("removeQuote", code);
       },
 
       restartInterval() {

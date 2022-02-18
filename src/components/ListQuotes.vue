@@ -18,7 +18,7 @@
         <td>{{ quote.low }}</td>
         <td>
           <span
-            class="label label-rounded text-small"
+            class="label label-rounded text-small text-center"
             :class="{
               'label-error': quote.pctChange < 0,
               'label-success': quote.pctChange > 0,
@@ -30,17 +30,17 @@
         <td>
           <a
             v-if="!listenQuotes.includes(key)"
-            class="btn btn-primary btn-sm tooltip tooltip-left"
+            class="btn btn-success btn-sm tooltip tooltip-left"
             data-tooltip="Seguir"
-            @click="$emit('listen', key)"
+            @click="$emit('addQuote', key)"
           >
             <i class="icon icon-plus"></i>
           </a>
           <a
             v-else
-            class="btn btn-error btn-sm tooltip tooltip-left"
+            class="btn btn-primary btn-sm tooltip tooltip-left"
             data-tooltip="Remover"
-            @click="$emit('unListen', key)"
+            @click="$emit('removeQuote', key)"
           >
             <i class="icon icon-minus"></i>
           </a>
@@ -62,7 +62,6 @@ export default {
       required: true,
     },
   },
-  emits: ['listen', 'unListen'],
-  setup() {},
+  emits: ['addQuote', 'removeQuote'],
 };
 </script>
