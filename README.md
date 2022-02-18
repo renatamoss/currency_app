@@ -5,6 +5,8 @@ This is a project developed in Vue JS with the purpose of studying Composition A
 ## Project Preview: 
 **https://currency-app-renatamoss.vercel.app/**
 
+[![img_checklist](https://github.com/renatamoss/app_make_your_wish/blob/main/make_your_wish.gif?raw=true)](https://currency-app-renatamoss.vercel.app//)
+
 ## API Implemented end-points:
 
 - [x]  **data server:** https://docs.awesomeapi.com.br/api-de-moedas
