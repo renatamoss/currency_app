@@ -28,12 +28,22 @@
           </span>
         </td>
         <td>
-           <a href="#" 
-           class="bnt btn-primary btn-sm tooltip tooltip-left"
-           data-tooltip="Seguir"
-           >
-           <i class="icon icon-plus"></i>
-           </a>
+          <a
+            v-if="!listenQuotes.includes(key)"
+            class="btn btn-primary btn-sm tooltip tooltip-left"
+            data-tooltip="Seguir"
+            @click="$emit('listen', key)"
+          >
+            <i class="icon icon-plus"></i>
+          </a>
+          <a
+            v-else
+            class="btn btn-error btn-sm tooltip tooltip-left"
+            data-tooltip="Remover"
+            @click="$emit('unListen', key)"
+          >
+            <i class="icon icon-minus"></i>
+          </a>
         </td>
       </tr>
     </tbody>
@@ -47,7 +57,12 @@ export default {
       type: Object,
       required: true,
     },
+    listenQuotes: {
+      type: Array,
+      required: true,
+    },
   },
+  emits: ['listen', 'unListen'],
   setup() {},
 };
 </script>

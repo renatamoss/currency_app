@@ -1,5 +1,9 @@
 <template>
-  <list-quotes :quotes="quotes" />
+  <list-quotes
+    :quotes="quotes"
+    :listen-quotes="listenQuotes"
+    @unListen="onUnListen"
+  />
   <div class="mt-2 text-right">
     <cite class="text-small">
       Atualizará novamente em <b> {{ nextUpDateTime }} Segundos </b>
@@ -9,15 +13,64 @@
 
 <script>
 import ListQuotes from "./ListQuotes";
-import { ref } from "vue";
+import { onMounted, onUnmounted, reactive, ref, toRefs, watch } from "vue";
+import api from "@/services/api";
+
+const CURRENT_UPDATE_TIME = 60;
 
 export default {
   components: { ListQuotes },
-  setup() {
-    const quotes = ref({});
-    const nextUpDateTime = ref(30);
+  props: {
+    listenQuotes: {
+      type: Array,
+      required: true,
+    },
+  },
+  emits: ['unListen'],
 
-    return { quotes, nextUpDateTime };
+  setup(props, { emit }) {
+    const interval = ref(null);
+    const quotes = ref({});
+    const nextUpDateTime = ref(CURRENT_UPDATE_TIME);
+
+    const methods = reactive({
+      onUnListen(code) {
+        emit("unListen", code);
+      },
+
+      restartInterval() {
+        clearInterval(interval.value);
+        nextUpDateTime.value = CURRENT_UPDATE_TIME;
+        interval.value = setInterval(() => {
+          nextUpDateTime.value -= 1;
+          if (nextUpDateTime.value === 0) {
+            nextUpDateTime.value = CURRENT_UPDATE_TIME;
+            this.refresh();
+          }
+        }, 1000);
+      },
+
+      async refresh() {
+        const { data } = await api.listen(props.listenQuotes);
+        quotes.value = data;
+      },
+    });
+
+    watch(props, () => {
+      methods.refresh();
+      methods.restartInterval();
+    });
+
+    onMounted(() => {
+      methods.refresh();
+      methods.restartInterval();
+    });
+
+    onUnmounted(() => {
+      clearInterval(interval.value);
+    });
+
+    return { ...toRefs(methods), quotes, nextUpDateTime };
   },
 };
 </script>
