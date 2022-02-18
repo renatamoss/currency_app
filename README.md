@@ -3,9 +3,7 @@
 This is a project developed in Vue JS with the purpose of studying Composition API. Consuming data from a currency quotes API, with Axios authentication. The Spectre.css framework was used for styling.
 
 ## Project Preview: 
-**https://app-make-your-wish.vercel.app/**
-
-[![img_checklist](https://github.com/renatamoss/app_make_your_wish/blob/main/make_your_wish.gif?raw=true)](https://app-make-your-wish.vercel.app/)
+**https://currency-app-renatamoss.vercel.app/**
 
 ## API Implemented end-points:
 

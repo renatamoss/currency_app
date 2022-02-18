@@ -36,7 +36,7 @@
     </div>
     <div class="card mt-2">
       <p class="text-center text-small text-italic bg-secondary p-2 mb-0">
-        Desenvolvido em ♥ Vue.js | 2022
+        Copyright © 2022 Renata Marques | Desenvolvido com ♥ Vue.js  
       </p>
     </div>
   </div>
