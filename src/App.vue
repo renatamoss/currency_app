@@ -1,30 +1,35 @@
 <template>
   <div class="container grid-lg my-2 py-2">
+    <!--AppHeader-->
     <div class="card mb-2">
-      <h1 class="text-center bg-secondary p-2 mb-0">Currency App</h1>
-    </div>
-
-    <!--Acompanhando-->
-    <div class="card mb-2 bg-gray" v-if="listenQuotes.length > 0">
-      <div class="card-header">
-        <div class="h4">Acompanhando</div>
-      </div>
-      <div class="card-body pt-0">
-        <watch-list-quotes
-          :listen-quotes="listenQuotes"
-          @remove-quote="removeQuote"
-        />
+      <div class="columns mb-2">
+        <div class="column col-3">
+          <img src="../public/a.png" class="img-responsive" alt="img" />
+        </div>
+        <div class="column col-9">
+          <h1 class="text-left text-dark p-2 m-0"><em>Currency App</em></h1>
+        </div>
       </div>
     </div>
 
-    <!--Todas as moedas -->
-    <div class="card bg-gray">
+    <!--AppContent-->
+    <!--watch-list-quotes-->
+    <watch-list-quotes
+      :listen-quotes="listenQuotes"
+      @remove-quote="removeQuote"
+    />
+
+    <!--all-quotes-->
+    <div class="card mb-2 bg-gray">
+
+      <!--<title-card-list>-->
       <div class="card-header">
         <div class="h4">Cotações das Moedas</div>
         <cite class="text-small">
           Selecione a moeda que deseja <b> acompanhar.</b>
         </cite>
       </div>
+      
       <div class="card-body">
         <list-quotes
           :quotes="quotes"
@@ -34,50 +39,48 @@
         />
       </div>
     </div>
+
+    <!--AppFooter-->
     <div class="card mt-2">
-      <p class="text-center text-small text-italic bg-secondary p-2 mb-0">
-        Copyright © 2022 Renata Marques | Desenvolvido com ♥ Vue.js  
+      <p class="text-center text-small p-2 mb-0">
+        Copyright © 2022 Renata Marques | Desenvolvido com ♥ Vue.js
       </p>
     </div>
   </div>
 </template>
 
-<script>
-import { onMounted, reactive, toRefs } from "vue";
+<script setup>
+import { ref, onMounted } from "vue";
 import api from "@/services/api";
 import ListQuotes from "./components/ListQuotes";
 import WatchListQuotes from "./components/WatchListQuotes";
 
-export default {
-  components: { ListQuotes, WatchListQuotes },
+const quotes = ref({});
+const listenQuotes = ref([]);
 
-  setup() {
-    const data = reactive({
-      quotes: {},
-      listenQuotes: [],
-    });
+//events coming(emits) from component listenQuotes
+//code = key coming from emit
+function addQuote(code) {
+  listenQuotes.value.push(code);
+}
 
-    function addQuote(code) {
-      data.listenQuotes.push(code);
-    }
+function removeQuote(code) {
+  listenQuotes.value = listenQuotes.value.filter((key) => key !== code);
+}
 
-    function removeQuote(code) {
-      // data.listenQuotes.pop(code);
-      data.listenQuotes = data.listenQuotes.filter((key) => key !== code);
-    }
-
-    //trazendo a lista completa da api
-    onMounted(async () => {
-      const response = await api.all();
-      data.quotes = response.data;
-    });
-
-    return { ...toRefs(data), addQuote, removeQuote };
-  },
-};
+//getting all api list
+onMounted(async () => {
+  const response = await api.all();
+  quotes.value = response.data;
+});
 </script>
 
 <style>
+.columns {
+  display: flex;
+  align-items: flex-end;
+}
+
 @media (max-width: 576px) {
   *,
   ::after,

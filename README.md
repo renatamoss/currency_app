@@ -5,7 +5,7 @@ This is a project developed in Vue JS with the purpose of studying Composition A
 ## Project Preview: 
 **https://currency-app-renatamoss.vercel.app/**
 
-[![img_checklist](https://github.com/renatamoss/app_make_your_wish/blob/main/make_your_wish.gif?raw=true)](https://currency-app-renatamoss.vercel.app//)
+[![img_currency](https://github.com/renatamoss/currency_app/blob/main/public/current-app_gif.gif)](https://currency-app-renatamoss.vercel.app//)
 
 ## API Implemented end-points:
 
@@ -16,7 +16,8 @@ This is a project developed in Vue JS with the purpose of studying Composition A
 * Vue CLI;
 * Vue.js;
 * Axios;
-* Spectre.css;
+* [Spectre CSS;](https://picturepan2.github.io/spectre/index.html)
+
 
 ## Project setup
 ```

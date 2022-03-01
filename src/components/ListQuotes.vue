@@ -2,16 +2,15 @@
   <table class="table">
     <thead>
       <tr>
-        <td>Código</td>
-        <td>Nome</td>
-        <td>Máximo</td>
-        <td>Mínimo</td>
-        <td>Variação</td>
-        <th></th>
+        <td><u>Código</u></td>
+        <td><u>Nome</u></td>
+        <td><u>Máximo</u></td>
+        <td><u>Mínimo</u></td>
+        <td><u>Variação</u></td>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(quote, key) in quotes" :key="key">
+      <tr class="active" v-for="(quote, key) in quotes" :key="key">
         <td>{{ key }}</td>
         <td>{{ quote.name }}</td>
         <td>{{ quote.high }}</td>
@@ -38,7 +37,7 @@
           </a>
           <a
             v-else
-            class="btn btn-primary btn-sm tooltip tooltip-left"
+            class="btn btn-success bg-warning btn-sm tooltip tooltip-left"
             data-tooltip="Remover"
             @click="$emit('removeQuote', key)"
           >
@@ -50,18 +49,17 @@
   </table>
 </template>
 
-<script>
-export default {
-  props: {
-    quotes: {
-      type: Object,
-      required: true,
-    },
-    listenQuotes: {
-      type: Array,
-      required: true,
-    },
+<script setup>
+defineProps({
+  quotes: {
+    type: Object,
+    required: true,
   },
-  emits: ['addQuote', 'removeQuote'],
-};
+  listenQuotes: {
+    type: Array,
+    required: true,
+  },
+});
+
+defineEmits(["addQuote", "removeQuote"]);
 </script>
