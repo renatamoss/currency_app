@@ -5,7 +5,7 @@ This is a project developed in Vue JS with the purpose of studying Composition A
 ## Project Preview: 
 **https://currency-app-renatamoss.vercel.app/**
 
-[![img_currency](https://github.com/renatamoss/currency_app/blob/main/public/current-app_gif.gif)](https://currency-app-renatamoss.vercel.app//)
+[![img_currency](https://github.com/renatamoss/currency_app/blob/main/public/gif-currency.gif)](https://currency-app-renatamoss.vercel.app//)
 
 ## API Implemented end-points:
 

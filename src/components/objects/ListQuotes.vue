@@ -63,3 +63,13 @@ defineProps({
 
 defineEmits(["addQuote", "removeQuote"]);
 </script>
+
+<style>
+@media (max-width: 768px) {
+  .icon {
+    height: 0.6rem !important;
+    vertical-align: 0 !important;
+    width: 0.6rem !important;
+  }
+}
+</style>

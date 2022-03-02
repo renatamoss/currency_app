@@ -1,12 +1,10 @@
 <template>
   <div class="card mb-2 bg-gray" v-if="listenQuotes.length > 0">
-    <!--<title-card-list>-->
-    <div class="card-header">
-      <div class="h4">Acompanhando</div>
-      <cite class="text-small">
-        Atualizará novamente em <b> {{ nextUpDateTime }} Segundos </b>
+    <list-title :listTitle="listTitle" :citeTitle="citeTitle">
+      <cite class="text-bold">
+        Atualizará novamente em {{ nextUpDateTime }} Segundos.
       </cite>
-    </div>
+    </list-title>
 
     <div class="card-body">
       <list-quotes
@@ -19,6 +17,7 @@
 </template>
 
 <script setup>
+import ListTitle from "../shareds/ListTitle.vue";
 import ListQuotes from "./ListQuotes";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import api from "@/services/api";
@@ -32,7 +31,12 @@ const props = defineProps({
 
 const emit = defineEmits(["removeQuote"]);
 
+const listTitle = ref("Acompanhamento");
+const citeTitle = ref(null);
+
 const CURRENT_UPDATE_TIME = 60;
+
+const data = ref(null);
 
 const nextUpDateTime = ref(CURRENT_UPDATE_TIME);
 const interval = ref(null);
@@ -48,7 +52,7 @@ const restartInterval = () => {
     nextUpDateTime.value -= 1;
     if (nextUpDateTime.value === 0) {
       nextUpDateTime.value = CURRENT_UPDATE_TIME;
-      this.refresh();
+      refresh();
     }
   }, 1000);
 };
