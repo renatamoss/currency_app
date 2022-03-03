@@ -1,11 +1,9 @@
 <template>
   <div class="card mb-2 bg-gray" v-if="listenQuotes.length > 0">
-    <list-title :listTitle="listTitle" :citeTitle="citeTitle">
-      <cite class="text-bold">
-        Atualizará novamente em {{ nextUpDateTime }} Segundos.
-      </cite>
-    </list-title>
-
+    <list-title 
+      :listTitle="listTitle" 
+      :citeTitle="citeTitle"
+    /> 
     <div class="card-body">
       <list-quotes
         :quotes="quotes"
@@ -19,7 +17,7 @@
 <script setup>
 import ListTitle from "../shareds/ListTitle.vue";
 import ListQuotes from "./ListQuotes";
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch, computed } from "vue";
 import api from "@/services/api";
 
 const props = defineProps({
@@ -31,13 +29,8 @@ const props = defineProps({
 
 const emit = defineEmits(["removeQuote"]);
 
-const listTitle = ref("Acompanhamento");
-const citeTitle = ref(null);
-
 const CURRENT_UPDATE_TIME = 60;
-
 const data = ref(null);
-
 const nextUpDateTime = ref(CURRENT_UPDATE_TIME);
 const interval = ref(null);
 const quotes = ref({});
@@ -56,6 +49,12 @@ const restartInterval = () => {
     }
   }, 1000);
 };
+
+//List Title
+const listTitle = ref("Tempo Real");
+const citeTitle = computed(
+  () => `A moeda atualizará novamente em ${nextUpDateTime.value} segundos.`
+);
 
 //event click removeQuote
 const removeQuote = (code) => {

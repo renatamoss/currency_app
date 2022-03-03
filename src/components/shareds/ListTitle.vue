@@ -3,13 +3,12 @@
     <div class="h4">{{ listTitle }}</div>
     <cite class="text-bold">
       {{ citeTitle }}
-      <slot />
     </cite>
   </div>
 </template>
 
+
 <script setup>
-import { ref } from "vue";
 
 defineProps({
   listTitle: {
@@ -23,7 +22,3 @@ defineProps({
 });
 
 </script>   
-
-                        
-<style lang= scoped>
-</style>

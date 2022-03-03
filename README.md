@@ -1,6 +1,6 @@
 # currency_app
 
-This is a project developed in Vue JS with the purpose of studying Composition API. Consuming data from a currency quotes API, with Axios authentication. The Spectre.css framework was used for styling.
+This is a project developed in Vue JS with the purpose of studying **Composition API**. Consuming data from a currency quotes API, with Axios authentication. The Spectre.css framework was used for styling.
 
 ## Project Preview: 
 **https://currency-app-renatamoss.vercel.app/**
@@ -14,10 +14,9 @@ This is a project developed in Vue JS with the purpose of studying Composition A
 ### Applied technologies:
 * NPM;
 * Vue CLI;
-* Vue.js;
+* Composition API;
 * Axios;
 * [Spectre CSS;](https://picturepan2.github.io/spectre/index.html)
-
 
 ## Project setup
 ```

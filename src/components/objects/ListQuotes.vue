@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <td><u>Código</u></td>
-        <td><u>Nome</u></td>
+        <td><u>Moeda</u></td>
         <td><u>Máximo</u></td>
         <td><u>Mínimo</u></td>
         <td><u>Variação</u></td>
@@ -61,12 +61,20 @@ defineProps({
   },
 });
 
+//event click addQuote e removeQuote
 defineEmits(["addQuote", "removeQuote"]);
 </script>
 
-<style>
+
+<style >
+/*Responsive*/
 @media (max-width: 768px) {
-  .icon {
+  * {
+    font-size: 0.8rem !important;
+  }
+
+  .icon,
+  .icon-plus {
     height: 0.6rem !important;
     vertical-align: 0 !important;
     width: 0.6rem !important;
